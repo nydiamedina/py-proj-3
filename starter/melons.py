@@ -20,15 +20,17 @@ class Melon:
 
         return f"${self.price:.2f}"
 
-    def get_by_id(melon_id):
-        """Return a melon, given its ID."""
 
-        return melon_dict[melon_id]
+def get_by_id(melon_id):
+    """Return a melon, given its ID."""
 
-    def get_all():
-        """Return list of melons."""
+    return melon_dict[melon_id]
 
-        return list(melon_dict.values())
+
+def get_all():
+    """Return list of melons."""
+
+    return list(melon_dict.values())
 
 
 melon_dict = {}

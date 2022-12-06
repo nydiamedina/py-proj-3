@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, flash, request
+import melons
 import jinja2
 
 app = Flask(__name__)
@@ -14,7 +15,8 @@ def homepage():
 def all_melons():
     """Return a page listing all the melons available for purchase."""
 
-    return render_template("all-melons.html")
+    melon_list = melons.get_all()
+    return render_template("all-melons.html", melon_list=melon_list)
 
 
 @app.route("/melon/<melon_id>")
