@@ -1,5 +1,7 @@
-{% extends 'base.html' %}
-
-{% block body %}
-   <h1>My Shopping Cart</h1>
+{% extends 'base.html' %} {% block body %}
+<ul>
+  {% for melon_id, qty in session['cart'].items() %}
+  <li>{{melon_id}}: {{qty}}</li>
+  {% endfor %}
+</ul>
 {% endblock %}

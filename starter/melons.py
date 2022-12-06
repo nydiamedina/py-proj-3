@@ -50,3 +50,5 @@ with open("melons.csv") as csvfile:
         )
 
         melon_dict[melon_id] = melon
+
+# print(melon_dict)
