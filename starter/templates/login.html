@@ -2,8 +2,8 @@
 <h2>Please Sign In</h2>
 
 <form method="POST" action="/login">
-  <div>{{ form.username.label }}: {{ form.username }}</div>
-  <div>{{ form.password.label }}: {{ form.password }}</div>
+  <div class="col-sm-2 col-form-label">{{ form.username.label }}: {{ form.username }}</div>
+  <div class="col-sm-2 col-form-label">{{ form.password.label }}: {{ form.password }}</div>
   {{ form.csrf_token }}
   <button class="btn btn-primary" type="submit">Sign In</button>
 </form>

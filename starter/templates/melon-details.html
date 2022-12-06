@@ -13,7 +13,7 @@
   {% endif %}
 </ul>
 <form method="POST" action="{{ url_for('add_to_cart', melon_id=melon.melon_id) }}">
-  <div>{{ form.quantity.label }}: {{ form.quantity }}</div>
+  <div class="col-sm-2 col-form-label">{{ form.quantity.label }}: {{ form.quantity }}</div>
   {{ form.csrf_token }}
   <button class="btn btn-primary" type="submit">Add to Cart</button>
 </form>
