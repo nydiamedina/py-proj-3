@@ -25,7 +25,10 @@
 
     <div class="container">
       <!-- This is where the main content goes. -->
-      {% block body %} BODY OF PAGE GOES HERE VIA INHERITANCE {% endblock %}
+      {% for message in get_flashed_messages() %}
+      <p class="alert alert-warning">{{ message }}</p>
+      {% endfor %} {% block body %} BODY OF PAGE GOES HERE VIA INHERITANCE {%
+      endblock %}
     </div>
   </body>
 </html>
