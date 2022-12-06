@@ -23,7 +23,8 @@ def all_melons():
 def melon_details(melon_id):
     """Return a page showing all info about a melon. Also, provide a button to buy that melon."""
 
-    return render_template("melon-details.html")
+    melon = melons.get_by_id(melon_id)
+    return render_template("melon-details.html", melon=melon)
 
 
 @app.route("/add-to-cart/<melon_id>")
