@@ -34,6 +34,8 @@ def melon_details(melon_id):
 @app.route("/add-to-cart/<melon_id>")
 def add_to_cart(melon_id):
     """Add a melon to the cart and redirect to the shopping cart page."""
+    if "username" not in session:
+        return redirect("/login")
 
     if "cart" not in session:
         session["cart"] = {}
@@ -50,6 +52,8 @@ def add_to_cart(melon_id):
 @app.route("/cart")
 def show_shopping_cart():
     """Display contents of shopping cart."""
+    if "username" not in session:
+        return redirect("/login")
 
     order_total = 0
     cart_melons = []
