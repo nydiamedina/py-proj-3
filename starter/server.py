@@ -121,6 +121,11 @@ def logout():
     return redirect("/login")
 
 
+@app.errorhandler(404)
+def error_404(e):
+    return render_template("404.html")
+
+
 if __name__ == "__main__":
     app.env = "development"
     app.run(debug=True, port=8000, host="localhost")
