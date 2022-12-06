@@ -48,7 +48,28 @@ def add_to_cart(melon_id):
 def show_shopping_cart():
     """Display contents of shopping cart."""
 
-    return render_template("cart.html")
+    order_total = 0
+    cart_melons = []
+
+    # Get cart dict from session (or an empty one if none exists yet)
+    cart = session.get("cart", {})
+
+    for melon_id, quantity in cart.items():
+        melon = melons.get_by_id(melon_id)
+
+        # Calculate total cost for this type of melon and add to order total
+        total_cost = quantity * melon.price
+        order_total += total_cost
+
+        # Add the quantity and total cost as attributes on the Melon object
+        melon.quantity = quantity
+        melon.total_cost = total_cost
+
+        cart_melons.append(melon)
+
+    return render_template(
+        "cart.html", cart_melons=cart_melons, order_total=order_total
+    )
 
 
 if __name__ == "__main__":
