@@ -72,6 +72,13 @@ def show_shopping_cart():
     )
 
 
+@app.route("/empty-cart")
+def empty_cart():
+    session["cart"] = {}
+
+    return redirect("/cart")
+
+
 if __name__ == "__main__":
     app.env = "development"
     app.run(debug=True, port=8000, host="localhost")
