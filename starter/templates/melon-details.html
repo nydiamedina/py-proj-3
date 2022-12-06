@@ -12,10 +12,9 @@
   <li>Warning: This melon has seeds!</li>
   {% endif %}
 </ul>
-
-<a
-  class="btn btn-primary"
-  href="{{ url_for('add_to_cart', melon_id=melon.melon_id) }}"
-  >Add to Cart</a
->
+<form method="POST" action="{{ url_for('add_to_cart', melon_id=melon.melon_id) }}">
+  <div>{{ form.quantity.label }}: {{ form.quantity }}</div>
+  {{ form.csrf_token }}
+  <button class="btn btn-primary" type="submit">Add to Cart</button>
+</form>
 {% endblock %}

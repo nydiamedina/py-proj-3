@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, flash, request, session
-from forms import LoginForm
+from forms import LoginForm, CartForm
 
 import customers
 import jinja2
@@ -28,25 +28,34 @@ def melon_details(melon_id):
     """Return a page showing all info about a melon. Also, provide a button to buy that melon."""
 
     melon = melons.get_by_id(melon_id)
-    return render_template("melon-details.html", melon=melon)
+    form = CartForm(request.form)
+
+    return render_template("melon-details.html", melon=melon, form=form)
 
 
-@app.route("/add-to-cart/<melon_id>")
+@app.route("/add-to-cart/<melon_id>", methods=["POST"])
 def add_to_cart(melon_id):
     """Add a melon to the cart and redirect to the shopping cart page."""
     if "username" not in session:
         return redirect("/login")
 
-    if "cart" not in session:
-        session["cart"] = {}
-    cart = session["cart"]  # store cart in local variable to make things easier
+    form = CartForm(request.form)
 
-    cart[melon_id] = cart.get(melon_id, 0) + 1
-    session.modified = True
-    flash(f"Melon {melon_id} successfully added to cart.")
-    print(cart)
+    if form.validate_on_submit():
+        quantity = form.quantity.data
 
-    return redirect("/cart")
+        if "cart" not in session:
+            session["cart"] = {}
+        cart = session["cart"]  # store cart in local variable to make things easier
+
+        cart[melon_id] = cart.get(melon_id, 0) + quantity
+        session.modified = True
+        flash(f"{quantity} melon(s) {melon_id} successfully added to cart.")
+        print(cart)
+
+        return redirect("/cart")
+
+    return render_template("melon-details.html", melon=melons.get_by_id(melon_id))
 
 
 @app.route("/cart")
